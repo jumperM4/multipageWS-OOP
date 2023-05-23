@@ -10,19 +10,17 @@ export default class Slider {
     if (n > this.slides.length) {
       this.slideIndex = 1;
     }
-
     if (n < 1) {
       this.slideIndex = this.slides.length;
     }
-
-    this.slides.forEach((slide) => {
+    Array.from(this.slides).forEach((slide, index) => {
       slide.style.display = "none";
     });
-
     this.slides[this.slides.length - 1].style.display = "block";
   }
 
   plusSlides(n) {
+    console.log(this.slideIndex);
     this.showSlides((this.slideIndex += n));
   }
 
@@ -37,7 +35,6 @@ export default class Slider {
         this.showSlides(this.slideIndex);
       });
     });
-
     this.showSlides(this.slideIndex);
   }
 }
