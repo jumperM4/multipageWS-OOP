@@ -15,7 +15,7 @@ export default class Slider {
     }
 
     if (this.hanson) {
-      this.hanson.style.opacity = "0";
+     this.hanson.style.opacity = "0";
       if (n === 3) {
         this.hanson.classList.add("animated");
         setTimeout(() => {
@@ -30,11 +30,11 @@ export default class Slider {
     Array.from(this.slides).forEach((slide, index) => {
       slide.style.display = "none";
     });
+
     this.slides[this.slideIndex - 1].style.display = "block";
   }
 
   plusSlides(n) {
-    console.log(this.slideIndex);
     this.showSlides((this.slideIndex += n));
   }
 
