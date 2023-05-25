@@ -12,7 +12,6 @@ export default class VideoPlayer {
           this.overlay.style.display = "flex";
         } else {
           const path = btn.getAttribute("data-url");
-          console.log(path);
 
           this.createPlayer(path);
         }
@@ -33,16 +32,13 @@ export default class VideoPlayer {
       width: "100%",
       videoId: `${url}`,
     });
-    console.log(this.player);
     this.overlay.style.display = "flex";
   }
 
   init() {
     const tag = document.createElement("script");
-
     tag.src = "https://www.youtube.com/iframe_api";
     const firstScriptTag = document.getElementsByTagName("script")[0];
-    console.log(firstScriptTag);
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
     this.bindTriggers();
