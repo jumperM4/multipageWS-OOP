@@ -1,8 +1,8 @@
 import Slider from "./slider";
 
 export default class MiniSlider extends Slider {
-  constructor(container, next, prev, activeClass, animate, autoplay) {
-    super(container, next, prev, activeClass, animate, autoplay);
+  constructor(obj) {
+    super(obj);
   }
 
   decorizeSlides() {
@@ -62,7 +62,7 @@ export default class MiniSlider extends Slider {
     this.container.style.cssText = `
         display: flex;
         flex-wrap: wrap;
-        overflow: hiddens;
+        overflow: hidden;
         align-items: flex-start;
       `;
 
