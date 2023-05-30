@@ -32,7 +32,7 @@ window.addEventListener("DOMContentLoaded", () => {
     prev: ".feed__slider .slick-prev",
     next: ".feed__slider .slick-next",
     activeClass: "feed__item-active",
-    animate: true,
+    animate: false,
   });
   feedSlider.init();
 
