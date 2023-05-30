@@ -4,12 +4,14 @@ export default class Difference {
     this.newOfficer = document.querySelector(newOfficer);
     this.oldItems = this.oldOfficer.querySelectorAll(items);
     this.newItems = this.newOfficer.querySelectorAll(items);
+    //this.items = items;
     this.oldCounter = 0;
     this.newCounter = 0;
   }
 
   bindTriggers(container, items, counter) {
     container.querySelector(".plus").addEventListener("click", () => {
+      console.log(items);
       if (counter !== items.length - 2) {
         items[counter].style.display = "flex";
         counter++;
