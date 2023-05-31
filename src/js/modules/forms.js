@@ -1,12 +1,77 @@
 export default class Form {
   constructor(forms) {
     this.forms = document.querySelectorAll(forms);
+    this.inputs = document.querySelectorAll("input");
     this.message = {
       loading: "Загрузка...",
       success: "Спасибо! Скоро мы с Вами свяжемся",
       failure: "Что-то пошло не так...",
     };
     this.path = "https://just-server-yo3y.onrender.com/api/data";
+  }
+
+  clearInputs() {
+    this.inputs.forEach((input) => {
+      input.value = "";
+    });
+  }
+
+  checkMailInputs() {
+    const mailInputs = document.querySelectorAll('[type="email"]');
+    mailInputs.forEach((mailInput) => {
+      mailInput.addEventListener("keypress", (event) => {
+        if (event.key.match(/[^a-z 0-9 @ \.]/gi)) {
+          event.preventDefault();
+        }
+      });
+    });
+  }
+
+  initMask() {
+    let setCursorPosition = (pos, elem) => {
+      elem.focus();
+
+      if (elem.setSelectionRange) {
+        elem.setSelectionRange(pos, pos);
+      } else if (elem.createTextRange) {
+        let range = elem.createTextRange();
+        range.collapse(true);
+        range.moveEnd("character", pos);
+        range.moveStart("character", pos);
+        range.select();
+      }
+    };
+
+    const createMask = (event) => {
+      const input = event.target;
+      const matrix = "+1 (___) ___-____";
+      let i = 0;
+      let def = matrix.replace(/\D/g, "");
+      let value = input.value.replace(/\D/g, "");
+
+      if (def.length >= value.length) {
+        value = def;
+      }
+      input.value = matrix.replace(/./g, (s) => {
+        return /[_\d]/.test(s) && i < value.length
+          ? value.charAt(i++)
+          : i >= value.length
+          ? ""
+          : s;
+      });
+      if (event.type === "blur") {
+        if (input.value.length === 2) {
+          input.value = "";
+        } else {
+          setCursorPosition(input.value.length, this);
+        }
+      }
+    };
+
+    let input = document.getElementById("phone");
+    input.addEventListener("input", createMask);
+    input.addEventListener("focus", createMask);
+    input.addEventListener("blur", createMask);
   }
 
   async postData(url, data) {
@@ -21,9 +86,10 @@ export default class Form {
   }
 
   init() {
+    this.initMask();
+    this.checkMailInputs();
     this.forms.forEach((form) => {
       form.addEventListener("submit", (e) => {
-        console.log(e);
         e.preventDefault();
 
         let statusMessage = document.createElement("div");
@@ -37,8 +103,10 @@ export default class Form {
         statusMessage.textContent = this.message.loading;
 
         const formData = new FormData(form);
+        console.log(formData);
         const data = {};
         formData.forEach((value, key) => (data[key] = value));
+        console.log(data);
 
         this.postData(this.path, data)
           .then((res) => {
@@ -48,6 +116,12 @@ export default class Form {
           .catch((err) => {
             console.log(err);
             statusMessage.textContent = this.message.failure;
+          })
+          .finally(() => {
+            this.clearInputs();
+            setTimeout(() => {
+              statusMessage.remove();
+            }, 6000);
           });
       });
     });
