@@ -8,6 +8,12 @@ window.addEventListener("DOMContentLoaded", () => {
   const slider = new MainSlider({ container: ".page", btns: ".next" });
   slider.render();
 
+  const mainSlider2Page = new MiniSlider({
+    container: ".modeuleapp",
+    btns: ".next",
+  });
+  mainSlider2Page.render();
+
   const showupSlider = new MiniSlider({
     container: ".showup__content-slider",
     prev: ".showup__prev",
