@@ -22,7 +22,7 @@ export default class MainSlider extends Slider {
           this.hanson.classList.add("slideInUp");
         }, 3000);
       }
-    } else {
+    } else if (this.hanson) {
       this.hanson.classList.remove("slideInUp");
     }
 
@@ -37,22 +37,42 @@ export default class MainSlider extends Slider {
     this.showSlides((this.slideIndex += n));
   }
 
+  bindTriggers() {
+    this.btns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        this.plusSlides(1);
+      });
+      btn.parentNode.previousElementSibling.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.slideIndex = 1;
+        this.showSlides(this.slideIndex);
+      });
+    });
+
+    this.prevBtns2Page.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        this.plusSlides(-1);
+      });
+    });
+
+    this.nextBtns2Page.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        this.plusSlides(1);
+      });
+    });
+  }
+
   render() {
     if (this.container) {
       if ((this.hanson = document.querySelector(".hanson"))) {
       }
 
-      this.btns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          this.plusSlides(1);
-        });
-        btn.parentNode.previousElementSibling.addEventListener("click", (e) => {
-          e.preventDefault();
-          this.slideIndex = 1;
-          this.showSlides(this.slideIndex);
-        });
-      });
       this.showSlides(this.slideIndex);
+      this.bindTriggers();
     }
   }
 }
