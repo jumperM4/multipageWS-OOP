@@ -20,7 +20,8 @@ export default class Form {
     const mailInputs = document.querySelectorAll('[type="email"]');
     mailInputs.forEach((mailInput) => {
       mailInput.addEventListener("keypress", (event) => {
-        if (event.key.match(/[^a-z 0-9 @ \.]/gi)) {
+        const onlyLatin = /[^a-z 0-9 @ \.]/gi;
+        if (event.key.match(onlyLatin)) {
           event.preventDefault();
         }
       });
