@@ -2,6 +2,8 @@ export default class Slider {
   constructor({
     container = null,
     btns = null,
+    nextBtns2Page = null,
+    prevBtns2Page = null,
     next = null,
     prev = null,
     activeClass = "",
@@ -13,6 +15,8 @@ export default class Slider {
       this.slides = this.container.children;
     } catch (e) {}
     this.btns = document.querySelectorAll(btns);
+    this.nextBtns2Page = document.querySelectorAll(nextBtns2Page);
+    this.prevBtns2Page = document.querySelectorAll(prevBtns2Page);
     this.next = document.querySelector(next);
     this.prev = document.querySelector(prev);
     this.activeClass = activeClass;
