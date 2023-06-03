@@ -70,7 +70,7 @@ export default class Form {
     };
 
     try {
-      let input = document.getElementById("phone");
+      const input = document.getElementById("phone");
       input.addEventListener("input", createMask);
       input.addEventListener("focus", createMask);
       input.addEventListener("blur", createMask);
