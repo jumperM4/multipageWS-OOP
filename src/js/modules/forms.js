@@ -70,9 +70,11 @@ export default class Form {
     };
 
     let input = document.getElementById("phone");
-    input.addEventListener("input", createMask);
-    input.addEventListener("focus", createMask);
-    input.addEventListener("blur", createMask);
+    if (input) {
+      input.addEventListener("input", createMask);
+      input.addEventListener("focus", createMask);
+      input.addEventListener("blur", createMask);
+    }
   }
 
   async postData(url, data) {
