@@ -69,12 +69,12 @@ export default class Form {
       }
     };
 
-    try {
-      const input = document.getElementById("phone");
+    let input = document.getElementById("phone");
+    if (input) {
       input.addEventListener("input", createMask);
       input.addEventListener("focus", createMask);
       input.addEventListener("blur", createMask);
-    } catch (e) {}
+    }
   }
 
   async postData(url, data) {

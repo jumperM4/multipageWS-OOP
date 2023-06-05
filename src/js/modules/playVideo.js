@@ -56,7 +56,6 @@ export default class VideoPlayer {
         onStateChange: this.onPlayerStateChange,
       },
     });
-    // console.log(this.player);
     this.overlay.style.display = "flex";
   }
 
@@ -67,9 +66,6 @@ export default class VideoPlayer {
       ).nextElementSibling;
 
       const playBtn = this.activeBtn.querySelector("svg").cloneNode(true);
-
-      // console.log(blockedElem);
-      // console.log(playBtn);
 
       if (state.data === 0) {
         if (
