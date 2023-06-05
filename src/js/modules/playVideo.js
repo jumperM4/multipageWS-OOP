@@ -68,8 +68,8 @@ export default class VideoPlayer {
 
       const playBtn = this.activeBtn.querySelector("svg").cloneNode(true);
 
-      console.log(blockedElem);
-      console.log(playBtn);
+      // console.log(blockedElem);
+      // console.log(playBtn);
 
       if (state.data === 0) {
         if (
